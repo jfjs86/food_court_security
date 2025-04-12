@@ -1,0 +1,6 @@
+server:
+  port: 8090
+
+loggin:
+  level:
+    root: INFO
