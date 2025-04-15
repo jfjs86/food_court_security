@@ -6,15 +6,15 @@ import java.util.Set;
 
 public class Profile {
 
-    private ProfileEnum profileId;
+    private int profileId;
     private String profileName;
     private Set<Permission> profilePermissions;
 
-    public ProfileEnum getProfileId() {
+    public int getProfileId() {
         return profileId;
     }
 
-    public void setProfileId(ProfileEnum profileId) {
+    public void setProfileId(int profileId) {
         this.profileId = profileId;
     }
 

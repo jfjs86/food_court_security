@@ -24,12 +24,12 @@ public class UserUseCase implements IUserServicePort {
     }
 
     @Override
-    public User createUser(User user) {
+    public User createOwnerUser(User user) {
         List<String> errors = validateUser(user);
         if (!errors.isEmpty()) {
             throw new InvalidUserException("Invalid user data: " + String.join(", ", errors));
         }
-        return this.userPersistencePort.createUser(user);
+        return this.userPersistencePort.createOwnerUser(user);
     }
 
     private List<String> validateUser(User user) {
@@ -61,9 +61,9 @@ public class UserUseCase implements IUserServicePort {
         if (isNullOrEmpty(user.getUserEmail()) || (!validateEmail(user.getUserEmail())) ) {
             errors.add("Invalid email format");
         }
-        if (isNullOrEmpty(user.getPhone())) {
+        if (isNullOrEmpty(user.getUserPhone())) {
             errors.add("Phone number is required");
-        } else if (!isValidPhone(user.getPhone())) {
+        } else if (!isValidPhone(user.getUserPhone())) {
             errors.add("Invalid phone number format or length (max " + MAX_PHONE_LENGTH + " digits with optional '+')");
         }
         if (isNullOrEmpty(user.getUserPassword())) {

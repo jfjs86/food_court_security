@@ -3,7 +3,6 @@ package com.pragma.foodcourt.security.domain.model;
 import com.pragma.foodcourt.security.domain.enums.IdentityTypeEnum;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.Set;
 import java.util.UUID;
 
@@ -16,7 +15,7 @@ public class User {
     private String userSecondName;
     private String userFirstLastName;
     private String userSecondLastName;
-    private String phone;
+    private String userPhone;
     private LocalDate userBirthdate;
     private String userEmail;
     private String userPassword;
@@ -79,12 +78,12 @@ public class User {
         this.userSecondLastName = userSecondLastName;
     }
 
-    public String getPhone() {
-        return phone;
+    public String getUserPhone() {
+        return userPhone;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setUserPhone(String userPhone) {
+        this.userPhone = userPhone;
     }
 
     public LocalDate getUserBirthdate() {

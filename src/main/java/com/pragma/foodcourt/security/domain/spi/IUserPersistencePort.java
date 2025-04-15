@@ -4,5 +4,5 @@ import com.pragma.foodcourt.security.domain.model.User;
 
 public interface IUserPersistencePort {
 
-    User createUser(User user);
+    User createOwnerUser(User user);
 }

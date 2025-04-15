@@ -4,14 +4,14 @@ import com.pragma.foodcourt.security.domain.enums.PermissionEnum;
 
 public class Permission {
 
-    private PermissionEnum permissionId;
+    private int permissionId;
     private String namePermission;
 
-    public PermissionEnum getPermissionId() {
+    public int getPermissionId() {
         return permissionId;
     }
 
-    public void setPermissionId(PermissionEnum permissionId) {
+    public void setPermissionId(int permissionId) {
         this.permissionId = permissionId;
     }
 
