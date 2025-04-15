@@ -5,6 +5,6 @@ import com.pragma.foodcourt.security.application.dto.UserResponseDto;
 
 public interface IUserHandler {
 
-    UserResponseDto createOwnerUser(UserRequestDto userRequestDto);
+    UserResponseDto createUser(UserRequestDto userRequestDto);
 
 }

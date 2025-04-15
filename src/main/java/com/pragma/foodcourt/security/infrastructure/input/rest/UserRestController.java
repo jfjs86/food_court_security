@@ -17,9 +17,9 @@ public class UserRestController {
 
     private final IUserHandler userHandler;
 
-    @PostMapping(value = UserResource.CREATE_OWNER_USER)
-    public ResponseEntity<?> createUser(@RequestBody UserRequestDto userRequest){
-        return ResponseEntity.ok(userHandler.createOwnerUser(userRequest));
+    @PostMapping(value = UserResource.CREATE_USER)
+    public ResponseEntity<?> createOwnerUser(@RequestBody UserRequestDto userRequest){
+        return new WrapperResponse<>(true,"",userHandler.createUser(userRequest)).createSuccessResponse();
     }
 
 }

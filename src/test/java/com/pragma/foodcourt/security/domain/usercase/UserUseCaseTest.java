@@ -67,9 +67,9 @@ public class UserUseCaseTest {
 
     @Test
     void createUser_valid() {
-        when(userPersistencePort.createOwnerUser(any(User.class))).thenReturn(user);
+        when(userPersistencePort.createUser(any(User.class))).thenReturn(user);
 
-        User createdUser = userUseCase.createOwnerUser(user);
+        User createdUser = userUseCase.createUser(user);
 
         assertNotNull(createdUser);
         assertEquals(user, createdUser);
@@ -103,43 +103,67 @@ public class UserUseCaseTest {
     }
 
     @Test
-    void createUser_invalid_email_format_without_at_symbol(){
-        when(userPersistencePort.createOwnerUser(any(User.class))).thenReturn(user);
-        user.setUserEmail("pperemail.com");
-        InvalidUserException exception = assertThrows(InvalidUserException.class, () -> userUseCase.createOwnerUser(user));
-        assertEquals("Invalid user data: Invalid email format", exception.getMessage());
+    void createUser_no_first_name(){
+        when(userPersistencePort.createUser(any(User.class))).thenReturn(user);
+        user.setUserFirstName(null);
+        InvalidUserException exception = assertThrows(InvalidUserException.class, () -> userUseCase.createUser(user));
+        assertEquals("Invalid user data: First name is required", exception.getMessage());
     }
 
     @Test
-    void createUser_invalid_email_format_without_mail_domain(){
-        when(userPersistencePort.createOwnerUser(any(User.class))).thenReturn(user);
-        user.setUserEmail("ppere@mail");
-        InvalidUserException exception = assertThrows(InvalidUserException.class, () -> userUseCase.createOwnerUser(user));
-        assertEquals("Invalid user data: Invalid email format", exception.getMessage());
+    void createUser_no_first_lastname(){
+        when(userPersistencePort.createUser(any(User.class))).thenReturn(user);
+        user.setUserFirstLastName(null);
+        InvalidUserException exception = assertThrows(InvalidUserException.class, () -> userUseCase.createUser(user));
+        assertEquals("Invalid user data: First last name is required", exception.getMessage());
     }
 
     @Test
-    void createUser_invalid_user_age(){
-        when(userPersistencePort.createOwnerUser(any(User.class))).thenReturn(user);
-        user.setUserBirthdate(LocalDate.now().minusYears(15));
-        InvalidUserException exception = assertThrows(InvalidUserException.class, () -> userUseCase.createOwnerUser(user));
-        assertEquals("Invalid user data: User must be at least 18 years old", exception.getMessage());
+    void createUser_no_identity_type(){
+        when(userPersistencePort.createUser(any(User.class))).thenReturn(user);
+        user.setUserIdentityType(null);
+        InvalidUserException exception = assertThrows(InvalidUserException.class, () -> userUseCase.createUser(user));
+        assertEquals("Invalid user data: Identity type is required", exception.getMessage());
     }
 
     @Test
-    void createUser_invalid_phone_bad_character(){
-        when(userPersistencePort.createOwnerUser(any(User.class))).thenReturn(user);
-        user.setUserPhone("#573102334312");
-        InvalidUserException exception = assertThrows(InvalidUserException.class, () -> userUseCase.createOwnerUser(user));
-        assertEquals("Invalid user data: Invalid phone number format or length (max 13 digits with optional '+')", exception.getMessage());
+    void createUser_no_identity_number(){
+        when(userPersistencePort.createUser(any(User.class))).thenReturn(user);
+        user.setUserIdentityNumber(null);
+        InvalidUserException exception = assertThrows(InvalidUserException.class, () -> userUseCase.createUser(user));
+        assertEquals("Invalid user data: Identity number is required", exception.getMessage());
     }
 
     @Test
-    void createUser_invalid_phone_bad_lenght(){
-        when(userPersistencePort.createOwnerUser(any(User.class))).thenReturn(user);
-        user.setUserPhone("+573102334312222");
-        InvalidUserException exception = assertThrows(InvalidUserException.class, () -> userUseCase.createOwnerUser(user));
-        assertEquals("Invalid user data: Invalid phone number format or length (max 13 digits with optional '+')", exception.getMessage());
+    void createUser_no_birthday(){
+        when(userPersistencePort.createUser(any(User.class))).thenReturn(user);
+        user.setUserBirthdate(null);
+        InvalidUserException exception = assertThrows(InvalidUserException.class, () -> userUseCase.createUser(user));
+        assertEquals("Invalid user data: Birthday is required", exception.getMessage());
+    }
+
+    @Test
+    void createUser_no_phone(){
+        when(userPersistencePort.createUser(any(User.class))).thenReturn(user);
+        user.setUserPhone(null);
+        InvalidUserException exception = assertThrows(InvalidUserException.class, () -> userUseCase.createUser(user));
+        assertEquals("Invalid user data: Phone number is required", exception.getMessage());
+    }
+
+    @Test
+    void createUser_no_password(){
+        when(userPersistencePort.createUser(any(User.class))).thenReturn(user);
+        user.setUserPassword(null);
+        InvalidUserException exception = assertThrows(InvalidUserException.class, () -> userUseCase.createUser(user));
+        assertEquals("Invalid user data: Password is required", exception.getMessage());
+    }
+
+    @Test
+    void createUser_password_invalid_lenght(){
+        when(userPersistencePort.createUser(any(User.class))).thenReturn(user);
+        user.setUserPassword("co12#@");
+        InvalidUserException exception = assertThrows(InvalidUserException.class, () -> userUseCase.createUser(user));
+        assertEquals("Invalid user data: Password must be at least 8 characters long", exception.getMessage());
     }
 
 }

@@ -1,7 +1,5 @@
 package com.pragma.foodcourt.security.domain.model;
 
-import com.pragma.foodcourt.security.domain.enums.ProfileEnum;
-
 import java.util.Set;
 
 public class Profile {

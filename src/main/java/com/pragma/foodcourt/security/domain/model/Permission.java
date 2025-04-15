@@ -1,7 +1,5 @@
 package com.pragma.foodcourt.security.domain.model;
 
-import com.pragma.foodcourt.security.domain.enums.PermissionEnum;
-
 public class Permission {
 
     private int permissionId;

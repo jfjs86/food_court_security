@@ -11,7 +11,7 @@ import java.util.Set;
 @Setter
 public class UserResponseDto {
 
-    private IdentityTypeEnum userIdentityType;
+    private int userIdentityType;
     private String userIdentityNumber;
     private String userFirstName;
     private String userSecondName;
@@ -20,7 +20,6 @@ public class UserResponseDto {
     private String userPhone;
     private LocalDate userBirthdate;
     private String userEmail;
-    private String userPassword;
     private Set<ProfileResponseDto> userProfiles;
 
 

@@ -18,8 +18,8 @@ public class UserHandlerImpl implements IUserHandler{
     private final IUserServicePort userServicePort;
 
     @Override
-    public UserResponseDto createOwnerUser(UserRequestDto userRequestDto) {
-        User user = userServicePort.createOwnerUser(IUserRequestMapper.INSTANCE.toUserModel(userRequestDto));
+    public UserResponseDto createUser(UserRequestDto userRequestDto) {
+        User user = userServicePort.createUser(IUserRequestMapper.INSTANCE.toUserModel(userRequestDto));
         return IUserResponseMapper.INSTANCE.toUserDto(user);
     }
 }

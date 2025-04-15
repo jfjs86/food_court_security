@@ -10,6 +10,5 @@ public interface IProfileEntityMapper {
 
     IProfileEntityMapper INSTANCE = Mappers.getMapper(IProfileEntityMapper.class);
 
-//    @Mapping(source = "userIdentityType", target = "userIdentityType")
     Profile toProfileModel(ProfileEntity profileEntity);
 }
