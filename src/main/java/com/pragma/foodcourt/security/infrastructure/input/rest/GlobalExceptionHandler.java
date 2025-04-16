@@ -18,7 +18,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(IllegalArgumentException.class)
     public ResponseEntity<?> handleIllegalArgumentExceptionn(IllegalArgumentException e, HttpStatus httpStatus) {
         e.printStackTrace();
-        return handleInternalError(e, HttpStatus.NOT_FOUND);
+        return handleInternalError(e, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(UserAlreadyExistsException.class)

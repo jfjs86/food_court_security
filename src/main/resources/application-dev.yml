@@ -23,6 +23,19 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
 
-#logging:
-#  level:
-#    root: DEBUG
+logging:
+  level:
+    root: DEBUG
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+  api-docs:
+    path: /v3/api-docs
+  info:
+    title: FoodCourt Security API
+    version: v1
+    description: API para la gestión de seguridad del FoodCourt.
+  servers:
+    - url: http://localhost:8091
+      description: Servidor local
