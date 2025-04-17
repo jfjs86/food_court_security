@@ -1,6 +1,5 @@
 package com.pragma.foodcourt.security.application.dto;
 
-import com.pragma.foodcourt.security.domain.enums.IdentityTypeEnum;
 import lombok.Getter;
 import lombok.Setter;
 

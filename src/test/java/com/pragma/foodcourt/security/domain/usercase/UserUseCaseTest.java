@@ -22,7 +22,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
-public class UserUseCaseTest {
+class UserUseCaseTest {
 
     @Mock
     private IUserPersistencePort userPersistencePort;
@@ -31,6 +31,10 @@ public class UserUseCaseTest {
     private UserUseCase userUseCase;
 
     private User user;
+
+    UserUseCaseTest() {
+
+    }
 
     @BeforeEach
     void setUp(){

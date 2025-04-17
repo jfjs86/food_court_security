@@ -8,6 +8,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 
+import java.util.Collections;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -20,7 +21,12 @@ public interface IUserRequestMapper {
     User toUserModel(UserRequestDto userRequestDto);
 
     default int fromIdentityTypeEnumToInt(IdentityTypeEnum identityType) {
-        return identityType == null ? null : identityType.getId();
+
+        if(identityType == null || identityType.getId() ==0){
+            return 0;
+        }
+
+        return  identityType.getId();
     }
 
     default IdentityTypeEnum fromIntToIdentityTypeEnum(Integer id) {
@@ -28,7 +34,10 @@ public interface IUserRequestMapper {
     }
 
     default Set<Profile> map(Set<Integer> ids) {
-        if (ids == null) return null;
+        if (ids == null){
+            return Collections.emptySet();
+        }
+
         return ids.stream().map(id -> {
             Profile profile = new Profile();
             profile.setProfileId(id);

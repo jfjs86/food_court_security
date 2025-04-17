@@ -4,4 +4,6 @@ public class RootResource {
 
     public static final String ROOT="/api";
 
+    private RootResource() {
+    }
 }

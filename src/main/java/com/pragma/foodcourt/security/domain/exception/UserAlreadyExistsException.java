@@ -1,4 +1,4 @@
-package com.pragma.foodcourt.security.infrastructure.exception;
+package com.pragma.foodcourt.security.domain.exception;
 
 public class UserAlreadyExistsException extends RuntimeException{
 

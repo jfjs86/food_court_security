@@ -33,8 +33,8 @@ public class UserRestController {
                     @ApiResponse(responseCode = "400", description = "Invalid request"),
                     @ApiResponse(responseCode = "409", description = "User Already Exists")
             })
-    public ResponseEntity<?> createOwnerUser(@RequestBody UserRequestDto userRequest){
-        return new WrapperResponse<>(true,"",userHandler.createUser(userRequest)).createSuccessResponse();
+    public ResponseEntity<WrapperResponse<UserResponseDto>> createOwnerUser(@RequestBody UserRequestDto userRequest){
+        return new WrapperResponse<UserResponseDto>(true,"",userHandler.createUser(userRequest)).createSuccessResponse();
     }
 
 }

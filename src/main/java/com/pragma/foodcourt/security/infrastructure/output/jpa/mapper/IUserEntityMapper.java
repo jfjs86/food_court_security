@@ -19,7 +19,10 @@ public interface IUserEntityMapper {
     UserEntity toUserEntity(User user);
 
     default int fromIdentityTypeEnumToInt(IdentityTypeEnum identityType) {
-        return identityType == null ? null : identityType.getId();
+        if(identityType == null ){
+            return 0;
+        }
+        return identityType.getId();
     }
 
     default IdentityTypeEnum fromIntToIdentityTypeEnum(Integer id) {

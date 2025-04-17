@@ -1,20 +1,13 @@
 package com.pragma.foodcourt.security.domain.usercase;
 
 import com.pragma.foodcourt.security.domain.api.IUserServicePort;
-import com.pragma.foodcourt.security.domain.enums.ProfileEnum;
 import com.pragma.foodcourt.security.domain.exception.InvalidUserException;
-import com.pragma.foodcourt.security.domain.model.Profile;
+import com.pragma.foodcourt.security.domain.exception.UserAlreadyExistsException;
 import com.pragma.foodcourt.security.domain.model.User;
 import com.pragma.foodcourt.security.domain.spi.IUserPersistencePort;
 
-import java.time.LocalDate;
-import java.time.Period;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class UserUseCase implements IUserServicePort {
 
@@ -32,7 +25,16 @@ public class UserUseCase implements IUserServicePort {
             throw new InvalidUserException("Invalid user data: " + String.join(", ", errors));
         }
 
+        boolean userAlreadyExists = userPersistencePort.validateUserAlreadyExists(
+                user.getUserIdentityType().getId(), user.getUserIdentityNumber()
+        );
+
+        if(userAlreadyExists){
+            throw new UserAlreadyExistsException("User already exists");
+        }
+
         user.setUserActive(true);
+        user.setUserPassword(userPersistencePort.getPasswordEncoder(user.getUserPassword()));
         return this.userPersistencePort.createUser(user);
     }
 

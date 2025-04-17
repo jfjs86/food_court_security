@@ -1,6 +1,5 @@
 package com.pragma.foodcourt.security.application.mapper;
 
-import com.pragma.foodcourt.security.application.dto.UserRequestDto;
 import com.pragma.foodcourt.security.application.dto.UserResponseDto;
 import com.pragma.foodcourt.security.domain.enums.IdentityTypeEnum;
 import com.pragma.foodcourt.security.domain.model.User;
@@ -16,6 +15,11 @@ public interface IUserResponseMapper {
     UserResponseDto toUserDto(User user);
 
     default int fromIdentityTypeEnumToInt(IdentityTypeEnum identityType) {
-        return identityType == null ? null : identityType.getId();
+
+        if(identityType == null){
+            return 0;
+        }
+
+        return identityType.getId();
     }
 }

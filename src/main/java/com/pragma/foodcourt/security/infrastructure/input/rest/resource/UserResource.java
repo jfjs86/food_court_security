@@ -4,4 +4,7 @@ public class UserResource {
 
     public static final String ROOT= RootResource.ROOT+"/user";
     public static final String CREATE_USER="/create-user";
+
+    private UserResource() {
+    }
 }
