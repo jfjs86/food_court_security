@@ -10,10 +10,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(UserResource.ROOT)
@@ -35,6 +32,24 @@ public class UserRestController {
             })
     public ResponseEntity<WrapperResponse<UserResponseDto>> createOwnerUser(@RequestBody UserRequestDto userRequest){
         return new WrapperResponse<UserResponseDto>(true,"",userHandler.createUser(userRequest)).createSuccessResponse();
+    }
+
+    @GetMapping(value = UserResource.GET_USER_BY_TYPE_AND_NUMBER_IDENTITY)
+    @Operation(summary = "Get user by identity",
+            description = "Get user by identity type and number identity.",
+            responses = {
+                    @ApiResponse(responseCode = "200", description = "Get exist User",
+                            content = @Content(mediaType = "application/json",
+                                    schema = @Schema(implementation = UserResponseDto.class))),
+                    @ApiResponse(responseCode = "500", description = "Internal server error (unknow exception)"),
+                    @ApiResponse(responseCode = "400", description = "Invalid request"),
+                    @ApiResponse(responseCode = "404", description = "User not found")
+            })
+    public ResponseEntity<WrapperResponse<UserResponseDto>> getUserByTypeAndNumberIdentity(@RequestParam int identityType, @RequestParam String identityNumber){
+        return new WrapperResponse<UserResponseDto>(true,
+                "",
+                userHandler.getUserByTypeAndNumberIdentity(identityType,identityNumber))
+                .createSuccessResponse();
     }
 
 }

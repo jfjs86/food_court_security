@@ -3,6 +3,7 @@ package com.pragma.foodcourt.security.domain.usercase;
 import com.pragma.foodcourt.security.domain.api.IUserServicePort;
 import com.pragma.foodcourt.security.domain.exception.InvalidUserException;
 import com.pragma.foodcourt.security.domain.exception.UserAlreadyExistsException;
+import com.pragma.foodcourt.security.domain.exception.UserNotFoundException;
 import com.pragma.foodcourt.security.domain.model.User;
 import com.pragma.foodcourt.security.domain.spi.IUserPersistencePort;
 
@@ -36,6 +37,15 @@ public class UserUseCase implements IUserServicePort {
         user.setUserActive(true);
         user.setUserPassword(userPersistencePort.getPasswordEncoder(user.getUserPassword()));
         return this.userPersistencePort.createUser(user);
+    }
+
+    @Override
+    public User getUserByTypeAndNumberIdentity(int identityType, String identityNumber) {
+
+        if(userPersistencePort.getUserByTypeAndNumberIdentity(identityType, identityNumber)== null){
+            throw new UserNotFoundException("User not found");
+        }
+        return userPersistencePort.getUserByTypeAndNumberIdentity(identityType, identityNumber);
     }
 
     private List<String> validateUser(User user) {

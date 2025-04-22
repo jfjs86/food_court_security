@@ -1,5 +1,6 @@
 package com.pragma.foodcourt.security.infrastructure.output.jpa.adapter;
 
+import com.pragma.foodcourt.security.domain.exception.UserNotFoundException;
 import com.pragma.foodcourt.security.domain.model.User;
 import com.pragma.foodcourt.security.domain.spi.IUserPersistencePort;
 import com.pragma.foodcourt.security.infrastructure.output.jpa.entity.UserEntity;
@@ -31,6 +32,13 @@ public class UserJpaAdapter implements IUserPersistencePort {
         return userRepository.findByUserIdentityTypeAndUserIdentityNumber(
                 identityType, identityNumber
         ).isPresent();
+    }
+
+    @Override
+    public User getUserByTypeAndNumberIdentity(int identityType, String identityNumber) {
+        UserEntity userEntity = userRepository.findByUserIdentityTypeAndUserIdentityNumber(identityType, identityNumber)
+                .orElseThrow( () -> new UserNotFoundException("User not found"));
+        return IUserEntityMapper.INSTANCE.toUserModel(userEntity);
     }
 
 

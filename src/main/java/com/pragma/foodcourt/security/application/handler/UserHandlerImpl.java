@@ -22,4 +22,10 @@ public class UserHandlerImpl implements IUserHandler{
         User user = userServicePort.createUser(IUserRequestMapper.INSTANCE.toUserModel(userRequestDto));
         return IUserResponseMapper.INSTANCE.toUserDto(user);
     }
+
+    @Override
+    public UserResponseDto getUserByTypeAndNumberIdentity(int identityType, String identityNumber) {
+        User user = userServicePort.getUserByTypeAndNumberIdentity(identityType, identityNumber);
+        return IUserResponseMapper.INSTANCE.toUserDto(user);
+    }
 }

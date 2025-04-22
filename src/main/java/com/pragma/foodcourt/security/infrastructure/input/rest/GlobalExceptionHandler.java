@@ -1,5 +1,6 @@
 package com.pragma.foodcourt.security.infrastructure.input.rest;
 
+import com.pragma.foodcourt.security.domain.exception.InvalidUserException;
 import com.pragma.foodcourt.security.domain.exception.UserAlreadyExistsException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -27,6 +28,12 @@ public class GlobalExceptionHandler {
     public ResponseEntity<WrapperResponse<Object>> handleUserAlreadyExistsException(UserAlreadyExistsException e){
         log.error("UserAlreadyExistsException: "+e);
         return handleInternalError(e, HttpStatus.CONFLICT);
+    }
+
+    @ExceptionHandler(InvalidUserException.class)
+    public ResponseEntity<WrapperResponse<Object>> handleUserInvalidUserException(InvalidUserException e){
+        log.error("InvalidUserException: "+e);
+        return handleInternalError(e, HttpStatus.NOT_FOUND);
     }
 
     private ResponseEntity<WrapperResponse<Object>> handleInternalError(Exception e, HttpStatus httpStatus) {

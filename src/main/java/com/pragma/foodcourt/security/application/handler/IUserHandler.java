@@ -7,4 +7,6 @@ public interface IUserHandler {
 
     UserResponseDto createUser(UserRequestDto userRequestDto);
 
+    UserResponseDto getUserByTypeAndNumberIdentity(int identityType, String identityNumber);
+
 }

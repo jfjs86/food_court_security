@@ -4,6 +4,7 @@ import com.pragma.foodcourt.security.domain.enums.IdentityTypeEnum;
 import com.pragma.foodcourt.security.domain.enums.PermissionEnum;
 import com.pragma.foodcourt.security.domain.enums.ProfileEnum;
 import com.pragma.foodcourt.security.domain.exception.InvalidUserException;
+import com.pragma.foodcourt.security.domain.exception.UserNotFoundException;
 import com.pragma.foodcourt.security.domain.model.Permission;
 import com.pragma.foodcourt.security.domain.model.Profile;
 import com.pragma.foodcourt.security.domain.model.User;
@@ -31,6 +32,9 @@ class UserUseCaseTest {
     private UserUseCase userUseCase;
 
     private User user;
+
+    private int testIdentityType = 1;
+    private String testIdentityNumber = "5200433";
 
     UserUseCaseTest() {
 
@@ -168,6 +172,30 @@ class UserUseCaseTest {
         user.setUserPassword("co12#@");
         InvalidUserException exception = assertThrows(InvalidUserException.class, () -> userUseCase.createUser(user));
         assertEquals("Invalid user data: Password must be at least 8 characters long", exception.getMessage());
+    }
+
+    @Test
+    void getUserByTypeAndNumberIdentity_userFound() {
+
+        when(userPersistencePort.getUserByTypeAndNumberIdentity(user.getUserIdentityType().getId()
+                , user.getUserIdentityNumber()))
+                .thenReturn(user);
+        User foundUser = userUseCase.getUserByTypeAndNumberIdentity(testIdentityType, testIdentityNumber);
+
+        assertNotNull(foundUser);
+        assertEquals(user.getUserId(), foundUser.getUserId());
+        assertEquals(user.getUserFirstName(), foundUser.getUserFirstName());
+
+    }
+
+    @Test
+    void getUserByTypeAndNumberIdentity_userNotFound() {
+        when(userPersistencePort.getUserByTypeAndNumberIdentity(testIdentityType, testIdentityNumber))
+                .thenReturn(null);
+
+        assertThrows(UserNotFoundException.class, () -> {
+            userUseCase.getUserByTypeAndNumberIdentity(testIdentityType, testIdentityNumber);
+        });
     }
 
 }
