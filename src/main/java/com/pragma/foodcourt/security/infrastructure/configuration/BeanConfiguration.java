@@ -1,9 +1,9 @@
 package com.pragma.foodcourt.security.infrastructure.configuration;
 
-import com.pragma.foodcourt.security.domain.api.IUserServicePort;
-import com.pragma.foodcourt.security.domain.spi.IUserPersistencePort;
-import com.pragma.foodcourt.security.domain.usercase.UserUseCase;
-import com.pragma.foodcourt.security.infrastructure.output.jpa.adapter.UserJpaAdapter;
+import com.pragma.foodcourt.security.domain.api.IOwnerUserServicePort;
+import com.pragma.foodcourt.security.domain.spi.IOwnerUserPersistencePort;
+import com.pragma.foodcourt.security.domain.usercase.OwnerUserUseCase;
+import com.pragma.foodcourt.security.infrastructure.output.jpa.adapter.OwnerUserJpaAdapter;
 import com.pragma.foodcourt.security.infrastructure.output.jpa.repository.IUserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -18,18 +18,19 @@ public class BeanConfiguration {
     private final IUserRepository userRepository;
 
     @Bean
-    public IUserPersistencePort userPersistencePort(){
-        return new UserJpaAdapter(userRepository, bCryptPasswordEncoder());
-    }
-
-    @Bean
-    public IUserServicePort userServicePort(){
-        return new UserUseCase(userPersistencePort());
-    }
-
-    @Bean
     public PasswordEncoder bCryptPasswordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
+    @Bean
+    public IOwnerUserPersistencePort ownerUserPersistencePort(){
+        return new OwnerUserJpaAdapter(userRepository, bCryptPasswordEncoder());
+    }
+
+    @Bean
+    public IOwnerUserServicePort ownerUserServicePort(){
+        return new OwnerUserUseCase(ownerUserPersistencePort());
+    }
+
 
 }

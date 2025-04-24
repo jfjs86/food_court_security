@@ -7,7 +7,6 @@ import com.pragma.foodcourt.security.domain.exception.InvalidUserException;
 import com.pragma.foodcourt.security.domain.model.Permission;
 import com.pragma.foodcourt.security.domain.model.Profile;
 import com.pragma.foodcourt.security.domain.model.User;
-import com.pragma.foodcourt.security.domain.spi.IUserPersistencePort;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;

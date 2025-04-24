@@ -2,7 +2,8 @@ package com.pragma.foodcourt.security.domain.api;
 
 import com.pragma.foodcourt.security.domain.model.User;
 
-public interface IUserServicePort {
+public interface IOwnerUserServicePort {
 
-    User createUser(User user);
+    User createOwnerUser(User user);
+
 }

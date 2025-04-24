@@ -1,5 +1,9 @@
 package com.pragma.foodcourt.security.domain.enums;
 
+import com.pragma.foodcourt.security.domain.exception.UserErrorMessage;
+
+import java.util.Arrays;
+
 public enum ProfileEnum {
 
     ADMINISTRADOR(1,"Administrador"),
@@ -23,22 +27,21 @@ public enum ProfileEnum {
         return name;
     }
 
-    public static ProfileEnum fromId(int id){
-        for (ProfileEnum profileEnum : ProfileEnum.values()){
-            if(profileEnum.id == id){
-                return profileEnum;
-            }
-        }
-        throw new IllegalArgumentException("Invalid profile id");
+    public static ProfileEnum fromId(int id) {
+        return Arrays.stream(ProfileEnum.values())
+                .filter(profile -> profile.id == id)
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException(UserErrorMessage.PROFILE_INVALID_ID));
     }
 
+
     public static ProfileEnum fromName(String name){
-        for (ProfileEnum profileEnum : ProfileEnum.values()){
-            if(profileEnum.name.equalsIgnoreCase(name)){
-                return  profileEnum;
-            }
-        }
-        throw new IllegalArgumentException("Invalid profile name");
+
+        return Arrays.stream(ProfileEnum.values())
+                .filter(profile -> profile.name.equalsIgnoreCase(name))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException(UserErrorMessage.PROFILE_INVALID_NAME));
+
     }
 
 

@@ -2,11 +2,9 @@ package com.pragma.foodcourt.security.domain.spi;
 
 import com.pragma.foodcourt.security.domain.model.User;
 
-public interface IUserPersistencePort {
+public interface IOwnerUserPersistencePort {
 
-    User createUser(User user);
+    User createOwnerUser(User user);
 
     String getPasswordEncoder(String plainPassword);
-
-    boolean validateUserAlreadyExists(int identityType, String identityNumber);
 }

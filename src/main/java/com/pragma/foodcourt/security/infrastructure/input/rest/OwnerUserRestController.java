@@ -1,8 +1,8 @@
 package com.pragma.foodcourt.security.infrastructure.input.rest;
 
-import com.pragma.foodcourt.security.application.dto.UserRequestDto;
-import com.pragma.foodcourt.security.application.dto.UserResponseDto;
-import com.pragma.foodcourt.security.application.handler.IUserHandler;
+import com.pragma.foodcourt.security.application.dto.in.UserRequestDto;
+import com.pragma.foodcourt.security.application.dto.out.UserResponseDto;
+import com.pragma.foodcourt.security.application.handler.IOwnerUserHandler;
 import com.pragma.foodcourt.security.infrastructure.input.rest.resource.UserResource;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -18,13 +18,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(UserResource.ROOT)
 @RequiredArgsConstructor
-public class UserRestController {
+public class OwnerUserRestController {
 
-    private final IUserHandler userHandler;
+    private final IOwnerUserHandler ownerUserHandler;
 
-    @PostMapping(value = UserResource.CREATE_USER)
-    @Operation(summary = "User creation",
-            description = "User creation for Food Court Application.",
+    @PostMapping(value = UserResource.CREATE_OWNER_USER)
+    @Operation(summary = "User owner creation",
+            description = "User owner creation for Food Court Application.",
             responses = {
                     @ApiResponse(responseCode = "200", description = "User created successfully",
                             content = @Content(mediaType = "application/json",
@@ -34,7 +34,7 @@ public class UserRestController {
                     @ApiResponse(responseCode = "409", description = "User Already Exists")
             })
     public ResponseEntity<WrapperResponse<UserResponseDto>> createOwnerUser(@RequestBody UserRequestDto userRequest){
-        return new WrapperResponse<UserResponseDto>(true,"",userHandler.createUser(userRequest)).createSuccessResponse();
+        return new WrapperResponse<UserResponseDto>(true,"",ownerUserHandler.createOwnerUser(userRequest)).createSuccessResponse();
     }
 
 }

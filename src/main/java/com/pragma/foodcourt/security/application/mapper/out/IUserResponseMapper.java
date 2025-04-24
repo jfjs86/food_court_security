@@ -1,6 +1,6 @@
-package com.pragma.foodcourt.security.application.mapper;
+package com.pragma.foodcourt.security.application.mapper.out;
 
-import com.pragma.foodcourt.security.application.dto.UserResponseDto;
+import com.pragma.foodcourt.security.application.dto.out.UserResponseDto;
 import com.pragma.foodcourt.security.domain.enums.IdentityTypeEnum;
 import com.pragma.foodcourt.security.domain.model.User;
 import org.mapstruct.Mapper;
