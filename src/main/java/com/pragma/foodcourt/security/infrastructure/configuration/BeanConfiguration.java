@@ -1,8 +1,12 @@
 package com.pragma.foodcourt.security.infrastructure.configuration;
 
+import com.pragma.foodcourt.security.domain.api.IFindUserServicePort;
 import com.pragma.foodcourt.security.domain.api.IOwnerUserServicePort;
+import com.pragma.foodcourt.security.domain.spi.IFindUserPersistencePort;
 import com.pragma.foodcourt.security.domain.spi.IOwnerUserPersistencePort;
+import com.pragma.foodcourt.security.domain.usercase.FindUserUserCase;
 import com.pragma.foodcourt.security.domain.usercase.OwnerUserUseCase;
+import com.pragma.foodcourt.security.infrastructure.output.jpa.adapter.FindUserJpaAdapter;
 import com.pragma.foodcourt.security.infrastructure.output.jpa.adapter.OwnerUserJpaAdapter;
 import com.pragma.foodcourt.security.infrastructure.output.jpa.repository.IUserRepository;
 import lombok.RequiredArgsConstructor;
@@ -30,6 +34,16 @@ public class BeanConfiguration {
     @Bean
     public IOwnerUserServicePort ownerUserServicePort(){
         return new OwnerUserUseCase(ownerUserPersistencePort());
+    }
+
+    @Bean
+    public IFindUserPersistencePort findUserPersistencePort(){
+        return new FindUserJpaAdapter(userRepository);
+    }
+
+    @Bean
+    public IFindUserServicePort findUserServicePort(){
+        return new FindUserUserCase(findUserPersistencePort());
     }
 
 

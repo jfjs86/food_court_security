@@ -14,5 +14,7 @@ public class UserErrorMessage {
     public static final String PROFILE_ASSIGN_EXCEPTION = "Error assigning profile to user";
     public static final String PROFILE_INVALID_ID = "Invalid profile id";
     public static final String PROFILE_INVALID_NAME = "Invalid profile name";
+    public static final String UER_NOT_FOUND = "User with identity type %d and identity number %s not found";
+
 
 }

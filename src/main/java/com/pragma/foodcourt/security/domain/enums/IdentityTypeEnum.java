@@ -1,5 +1,9 @@
 package com.pragma.foodcourt.security.domain.enums;
 
+import com.pragma.foodcourt.security.domain.exception.UserErrorMessage;
+
+import java.util.Arrays;
+
 public enum IdentityTypeEnum {
 
     CEDULA(1,"Cédula de Ciudadanía"),
@@ -26,23 +30,18 @@ public enum IdentityTypeEnum {
     }
 
     public static IdentityTypeEnum fromId(int id){
-        for (IdentityTypeEnum identityTypeEnum : IdentityTypeEnum.values()){
-            if(identityTypeEnum.id==id){
-                return identityTypeEnum;
-            }
-        }
-
-        throw new IllegalArgumentException("Invalid identity type id");
+        return Arrays.stream(IdentityTypeEnum.values())
+                .filter(identityType -> identityType.id == id)
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException(UserErrorMessage.INVALID_USER_ID_TYPE));
     }
 
     public static IdentityTypeEnum fromName(String name){
-        for (IdentityTypeEnum identityTypeEnum : IdentityTypeEnum.values()){
-            if(identityTypeEnum.name().equalsIgnoreCase(name)){
-                return identityTypeEnum;
-            }
-        }
+        return Arrays.stream(IdentityTypeEnum.values())
+                .filter(identityType -> identityType.name().equalsIgnoreCase(name))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException(UserErrorMessage.INVALID_USER_ID_TYPE));
 
-        throw new IllegalArgumentException("Invalid identity type id");
     }
 
 
